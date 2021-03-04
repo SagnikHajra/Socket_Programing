@@ -6,7 +6,7 @@ This project introduces the concept of client/server architecture and caching. T
 2. PUT age 18              // Saves the {age:18} in the server.
 3. GET name                // Returns "Derek Moss"
 4. PUT gender M            // Saves the {gender:M} in the server.
-5. DUMP                    // Returns "Derek Moss", "18", "M"
+5. DUMP                    // Returns "name", "age", "gender"
   
 ## Server: 
 Server keeps listening to only one client at a time. It stores the data in a dictionary received from Client(in this case proxyServer). Server also returns the GET and DUMP requests. In case of GET request, it receives a key and return the value if it is found else None. It returns all the keys stored when receives a DUMP request.
