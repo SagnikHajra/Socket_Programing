@@ -69,8 +69,11 @@ def sendFile():
     if send(file):
         while True:
             flag, serverMsg = receive()
-            if not flag and serverMsg:
+            if not flag and serverMsg not in socket.messages:
                 insert(serverMsg)
+                xy = open(f'{fileName}.converted', 'w')
+                xy.write(serverMsg)
+                xy.close()
             else:
                 break
 
