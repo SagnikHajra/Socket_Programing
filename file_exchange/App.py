@@ -215,7 +215,7 @@ frame2.pack()
 # all under header {Upload a Text file}
 # ###################################################################################
 frame3 = tk.Frame(master=master, width=600, height=122, bg=backgroundColor)
-frame3.wm_attributes("-transparentcolor", backgroundColor)
+# frame3.wm_attributes("-transparentcolor", backgroundColor)
 
 tk.Label(frame3, text="Upload a text file", font=titleFont, bg=backgroundColor, fg="bisque", justify="center").place(x=220,
                                                                                                                y=0)
