@@ -19,7 +19,10 @@ master = tk.Tk()
 master.title("Welcome to Client")
 master.geometry('600x540')
 
-master.wm_attributes("-transparentcolor", "#60b26c")
+#backgroundColor = "#60b26c"
+backgroundColor = "grey"
+
+# master.wm_attributes("-transparentcolor", backgroundColor)
 
 
 # Used by multiple functions to maintain state of the buttons
@@ -162,13 +165,13 @@ def submitHandler():
 # ###############  FRAME1[Server Info]  ############################
 # Frame2 has {Server} title label, {Address} and {Port} input boxes and {Connect} button
 # #####################################################
-frame1 = tk.Frame(master=master, width=600, height=110, bg="#60b26c")
+frame1 = tk.Frame(master=master, width=600, height=110, bg=backgroundColor)
 
 tk.Label(
-    frame1, text="Server", font=titleFont, bg="#60b26c", fg="bisque", justify="center").place(x=250, y=1)
+    frame1, text="Server", font=titleFont, bg=backgroundColor, fg="bisque", justify="center").place(x=250, y=1)
 
 tk.Label(
-    frame1, text="Address : ", font=subTitleFont, bg="#60b26c", fg="bisque", justify="center").place(x=190, y=22)
+    frame1, text="Address : ", font=subTitleFont, bg=backgroundColor, fg="bisque", justify="center").place(x=190, y=22)
 add = tk.StringVar(frame1, value=address)
 E1 = tk.Entry(
     frame1, textvariable=add, font=subTitleFont, bg="lightgrey", fg="black", cursor="xterm black"
@@ -176,7 +179,7 @@ E1 = tk.Entry(
 E1.place(x=250, y=22)
 
 tk.Label(
-    frame1, text="Port :", font=subTitleFont, bg="#60b26c", fg="bisque", justify="center").place(x=190, y=45)
+    frame1, text="Port :", font=subTitleFont, bg=backgroundColor, fg="bisque", justify="center").place(x=190, y=45)
 prt = tk.StringVar(frame1, value=port)
 E2 = tk.Entry(
     frame1, textvariable=prt, font=subTitleFont, bg="lightgrey", fg="black", cursor="xterm black"
@@ -184,25 +187,25 @@ E2 = tk.Entry(
 E2.place(x=250, y=45)
 connButton = tk.Button(
     frame1, text="Connect", command=connectionHandler, state=tk.NORMAL, font=subTitleFont,
-                       bg="#60b26c", fg="bisque", pady=buttonPady, padx=buttonPadx)
+                       bg=backgroundColor, fg="bisque", pady=buttonPady, padx=buttonPadx)
 connButton.place(x=250, y=68)
 
-frame1.wm_attributes("-transparentcolor", "#60b26c")
+# frame1.wm_attributes("-transparentcolor", backgroundColor)
 frame1.pack()
 
 # ###############  FRAME2[Username]  ############################
 # Frame2 only has {Username} input box and {Submit} button
 # #####################################################
-frame2 = tk.Frame(master=master, width=600, height=30, bg="#60b26c")
+frame2 = tk.Frame(master=master, width=600, height=30, bg=backgroundColor)
 
-tk.Label(frame2, text="Username: ", font=subTitleFont, bg="#60b26c", fg="bisque", justify="center").place(x=150, y=2)
+tk.Label(frame2, text="Username: ", font=subTitleFont, bg=backgroundColor, fg="bisque", justify="center").place(x=150, y=2)
 
 user = tk.StringVar(frame2, value=username)
 E31 = tk.Entry(
     frame2, textvariable=user, font=subTitleFont, bg="lightgrey", fg="black", cursor="xterm black")
 
 E31.place(x=235, y=2)
-submit = tk.Button(master=frame2, text="Submit", font=subTitleFont, bg="#60b26c", fg="bisque",
+submit = tk.Button(master=frame2, text="Submit", font=subTitleFont, bg=backgroundColor, fg="bisque",
                    state=tk.DISABLED, command=submitHandler)
 submit.place(x=400, y=0)
 frame2.pack()
@@ -211,34 +214,34 @@ frame2.pack()
 # Frame2 has {Open File} button, added {File Name} label and {Send} to server button
 # all under header {Upload a Text file}
 # ###################################################################################
-frame3 = tk.Frame(master=master, width=600, height=122, bg="#60b26c")
-frame3.wm_attributes("-transparentcolor", "#60b26c")
+frame3 = tk.Frame(master=master, width=600, height=122, bg=backgroundColor)
+frame3.wm_attributes("-transparentcolor", backgroundColor)
 
-tk.Label(frame3, text="Upload a text file", font=titleFont, bg="#60b26c", fg="bisque", justify="center").place(x=220,
+tk.Label(frame3, text="Upload a text file", font=titleFont, bg=backgroundColor, fg="bisque", justify="center").place(x=220,
                                                                                                                y=0)
-openFile = tk.Button(frame3, text="Open File", state=tk.DISABLED, padx=buttonPadx, pady=buttonPady, bg="#60b26c",
+openFile = tk.Button(frame3, text="Open File", state=tk.DISABLED, padx=buttonPadx, pady=buttonPady, bg=backgroundColor,
                      fg="bisque", justify="center", command=addFile)
 openFile.place(x=250, y=22)
 # The below label is kept blank intentionally and shows the file path when user selects a file using {Open File} button
-fileLabel = tk.Label(frame3, text="", font=("Cambria", 8), bg="#60b26c", fg="bisque", justify="center")
+fileLabel = tk.Label(frame3, text="", font=("Cambria", 8), bg=backgroundColor, fg="bisque", justify="center")
 fileLabel.place(x=150, y=50)
 
 sendFile = tk.Button(frame3, text="Send", state=tk.DISABLED, font=subTitleFont, padx=buttonPadx, pady=buttonPady,
-                     bg="#60b26c", fg="bisque", justify="center", command=sendFile)
+                     bg=backgroundColor, fg="bisque", justify="center", command=sendFile)
 sendFile.place(x=260, y=70)
-textLabel = tk.Label(master=frame3, text="Console Log", font=("Arial", 12), bg="#60b26c", fg="bisque").place(x=240,
+textLabel = tk.Label(master=frame3, text="Console Log", font=("Arial", 12), bg=backgroundColor, fg="bisque").place(x=240,
                                                                                                              y=100)
 frame3.pack()
 
 # ############# Scrollable #############################
 # Scrollable Console Log
 # #######################################################
-textArea = st.ScrolledText(master=master, bg="#60b26c", fg="bisque", padx=10, pady=5, font=("Courier", 10), height=15)
+textArea = st.ScrolledText(master=master, bg=backgroundColor, fg="bisque", padx=10, pady=5, font=("Courier", 10), height=15)
 textArea.pack()
 
 # ################## Exit button ###########################
 tk.Button(master, text='Exit', command=master.quit, font=("Arial", 10), bg="grey", fg="bisque", pady=.8, padx=10).pack(
     side="bottom")
 # ############### Keep the window on top always #################
-master.call('wm', 'attributes', '.', '-topmost', True)
+# master.call('wm', 'attributes', '.', '-topmost', True)
 master.mainloop()
