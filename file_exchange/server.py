@@ -35,8 +35,7 @@ class server(SocketClass):
     # Once the user is disconnected, remove from userTable. The handle_client func does it
     def verifyUsername(self, clientSocket, counter=0):
         if counter > 3:
-            return False
-        self.send(self.USERNAME, clientSocket, self.DELAY_TIME)
+            return False, ''
         username = self.receive(clientSocket)
         if username in self.userTable:
             self.send(self.USER_INVALID, clientSocket, self.DELAY_TIME)
@@ -51,6 +50,7 @@ class server(SocketClass):
         # Send the welcome message
         self.send(self.WELCOME, clientSocket)
         # Verify if the user is new
+        self.send(self.USERNAME, clientSocket, self.DELAY_TIME)
         verified, username = self.verifyUsername(clientSocket)
         # send error msg if not a new user else ask to send the file
         if verified:
