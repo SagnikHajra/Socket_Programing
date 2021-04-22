@@ -34,11 +34,13 @@ userTable = set()
 DELAY_TIME = 0.1
 
 
-def check_every_sixty_seconds(n=60):
+def check_every_sixty_seconds(n=2):
     while True:
+        time.sleep(n)
+        print("check_every_sixty_seconds")
         for eachClient in connections:
             socket.send(socket.POOL, eachClient, DELAY_TIME)
-        time.sleep(n)
+
 
 
 def insert(msg):

@@ -101,6 +101,8 @@ def receive():
         elif serverMsg == socket.USER_INVALID:
             insert(socket.messages[serverMsg])
             return False, serverMsg
+        elif serverMsg == socket.POOL:
+            return True, serverMsg
         else:
             return False, serverMsg
 
@@ -113,6 +115,13 @@ def send(msg):
         insert(e.strerror)
         return False
     return True
+
+
+def checkQueueAndSend():
+    if queue.len() > 0:
+        listToStr = ' '.join(map(str, queue))
+        insert(listToStr)
+        send(listToStr)
 
 
 # Estbl connection with server after recving address/Port via input boxes
@@ -131,6 +140,9 @@ def connectionHandler():
             changeState(submit)
             changeState(connButton)
             return
+        elif serverMsg == socket.POOL:
+            insert("Got poll")
+            checkQueueAndSend()
     elif serverMsg == socket.CONNECTION_CLOSE:
         return
     insert(f"Error: unexpected message received"
