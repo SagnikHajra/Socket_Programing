@@ -17,8 +17,8 @@ buttonPady = 0.5
 
 master = tk.Tk()
 master.title("Welcome to Client")
-master.geometry('600x540')
-
+master.geometry('800x800')
+queue = []
 #backgroundColor = "#60b26c"
 backgroundColor = "black"
 
@@ -137,6 +137,12 @@ def connectionHandler():
            f"[{socket.messages[serverMsg] if serverMsg in socket.messages else serverMsg}]"
            )
 
+def addToQueue():
+    addedWord = E35.get()
+    E35.delete(0, 'end')
+    queue.append(addedWord)
+    queueArea.insert(tk.INSERT, addedWord + '\n')
+
 
 # Submits the Username
 def submitHandler():
@@ -233,11 +239,30 @@ textLabel = tk.Label(master=frame3, text="Console Log", font=("Arial", 12), bg=b
                                                                                                              y=100)
 frame3.pack()
 
+# ###############  FRAME4  ############################
+# Frame4 only has input box and {add} button
+# #####################################################
+frame4 = tk.Frame(master=master, width=600, height=30, bg=backgroundColor)
+
+E35 = tk.Entry(frame4, font=subTitleFont, bg="lightgrey", fg="black", cursor="xterm black")
+E35.place(x=235, y=2)
+
+add = tk.Button(master=frame4, text="add", font=subTitleFont, bg=backgroundColor, fg="bisque", command=addToQueue)
+add.place(x=400, y=0)
+frame4.pack()
+
 # ############# Scrollable #############################
-# Scrollable Console Log
+# Scrollable Console Log for Log information
 # #######################################################
-textArea = st.ScrolledText(master=master, bg=backgroundColor, fg="bisque", padx=10, pady=5, font=("Courier", 10), height=15)
+textArea = st.ScrolledText(master=master, bg=backgroundColor, fg="bisque", padx=10, pady=5, font=("Courier", 12), height=15)
 textArea.pack()
+
+# ############# Scrollable #############################
+# Scrollable Console Log for queue values.
+# #######################################################
+queueArea = st.ScrolledText(master=master, bg=backgroundColor, fg="bisque", padx=5, pady=5, font=("Courier", 12), height=15)
+queueArea.pack()
+
 
 # ################## Exit button ###########################
 tk.Button(master, text='Exit', command=master.quit, font=("Arial", 10), bg="grey", fg="bisque", pady=.8, padx=10).pack(
