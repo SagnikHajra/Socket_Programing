@@ -20,6 +20,8 @@ master.geometry('600x540')
 backgroundColor = "black"
 # socket=None
 
+connections = []
+
 with open('words.txt','r') as f:
     print("Words file opened")
     for line in f:
@@ -30,6 +32,14 @@ with open('words.txt','r') as f:
 
 userTable = set()
 DELAY_TIME = 0.1
+
+
+def check_every_sixty_seconds(n=60):
+    while True:
+        for eachClient in connections:
+            socket.send(socket.POOL, eachClient, DELAY_TIME)
+        time.sleep(n)
+
 
 def insert(msg):
     textArea.insert(tk.INSERT, "> " + msg + '\n')
@@ -88,12 +98,15 @@ def startServer():
 # Get the client details after accepting a request and send the welcome message
     while True:
         clientSocket, (clientAdd, clientPort) = socket.socket.accept()
+        connections.append(clientSocket)
         print(f"connection from {clientAdd, clientPort} has been established")
         insert(f"connection from {clientAdd, clientPort} has been established")
         thread = threading.Thread(target=handle_client, args=(clientSocket,))
         thread.start()
-        activeCount = threading.activeCount() - 1
-        print(f"Number of Threads active:{activeCount}")
+        pollingThread = threading.Thread(target=check_every_sixty_seconds, daemon=True)
+        pollingThread.start()
+#         activeCount = threading.activeCount() - 1
+#         print(f"Number of Threads active:{activeCount}")
 
 
 

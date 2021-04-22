@@ -16,6 +16,7 @@ class SocketClass:
         self.USER_INVALID = "USER_INVALID"
         self.USER_VERIFIED = "USER_VERIFIED"
         self.CONNECTION_CLOSE = "CONNECTION_CLOSE"
+        self.POOL = "POLLING"
 
         self.messages = {
             self.WELCOME: "Welcome to server",
@@ -23,7 +24,8 @@ class SocketClass:
             self.FILE: 'Upload the file:',
             self.USER_INVALID: "Error:- Connection rejected, user already connected",
             self.USER_VERIFIED: "Success:- Username added",
-            self.CONNECTION_CLOSE: "Gotcha. Closing the connection..."
+            self.CONNECTION_CLOSE: "Gotcha. Closing the connection...",
+            self.POOL: "Got polling message"
         }
         if server:
             self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

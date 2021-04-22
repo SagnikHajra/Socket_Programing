@@ -144,6 +144,7 @@ def addToQueue():
     queueArea.insert(tk.INSERT, addedWord + '\n')
 
 
+
 # Submits the Username
 def submitHandler():
     global username
