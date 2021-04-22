@@ -20,7 +20,7 @@ master.title("Welcome to Client")
 master.geometry('600x540')
 
 #backgroundColor = "#60b26c"
-backgroundColor = "grey"
+backgroundColor = "black"
 
 # master.wm_attributes("-transparentcolor", backgroundColor)
 

@@ -3,6 +3,7 @@ from SocketFunc import SocketClass
 import threading
 import re
 
+
 # Create a socket and the listen for any client, once a connection is established with a client, communicate with it.
 class server(SocketClass):
     def __init__(self):
@@ -12,7 +13,8 @@ class server(SocketClass):
         self.command = ''
         self.userTable = set()
         self.DELAY_TIME = 0.1
-        self.wordList = "ALICE DAISY-CHAIN DAISIES WHITERABBIT WAISTCOAT-POCKET DINAH DUCHESS GRYPHON BILL PETER BAYARD LORY PAT FOOTMAN".split(" ")
+        self.wordList = "ALICE DAISY-CHAIN DAISIES WHITERABBIT WAISTCOAT-POCKET DINAH DUCHESS GRYPHON BILL PETER BAYARD LORY PAT FOOTMAN QUCK".split(
+            " ")
         self.wordDict = {x.strip() for x in self.wordList}
 
         super(server, self).__init__(self.ADD, self.PRT, server=True, clientLimit=3)
@@ -39,7 +41,7 @@ class server(SocketClass):
         username = self.receive(clientSocket)
         if username in self.userTable:
             self.send(self.USER_INVALID, clientSocket, self.DELAY_TIME)
-            verified = self.verifyUsername(clientSocket, counter+1)
+            verified = self.verifyUsername(clientSocket, counter + 1)
         else:
             verified = True
             self.userTable.add(username)
@@ -71,10 +73,11 @@ class server(SocketClass):
         while True:
             clientSocket, (clientAdd, clientPort) = self.socket.accept()
             print(f"connection from {clientAdd, clientPort} has been established")
-            thread = threading.Thread(target=self.handle_client, args=(clientSocket, ))
+            thread = threading.Thread(target=self.handle_client, args=(clientSocket,))
             thread.start()
             activeCount = threading.activeCount() - 1
             print(f"Number of Threads active:{activeCount}")
+
 
 if __name__ == "__main__":
     # let the game begin
