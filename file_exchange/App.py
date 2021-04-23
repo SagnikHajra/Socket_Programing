@@ -102,6 +102,7 @@ def receive():
             insert(socket.messages[serverMsg])
             return False, serverMsg
         elif serverMsg == socket.POOL:
+            insert(socket.messages[serverMsg])
             return True, serverMsg
         else:
             return False, serverMsg
@@ -118,6 +119,7 @@ def send(msg):
 
 
 def checkQueueAndSend():
+    insert("Inside check queue and send")
     if queue.len() > 0:
         listToStr = ' '.join(map(str, queue))
         insert(listToStr)
@@ -143,18 +145,19 @@ def connectionHandler():
         elif serverMsg == socket.POOL:
             insert("Got poll")
             checkQueueAndSend()
+            return
     elif serverMsg == socket.CONNECTION_CLOSE:
         return
     insert(f"Error: unexpected message received"
            f"[{socket.messages[serverMsg] if serverMsg in socket.messages else serverMsg}]"
            )
 
+
 def addToQueue():
     addedWord = E35.get()
     E35.delete(0, 'end')
     queue.append(addedWord)
     queueArea.insert(tk.INSERT, addedWord + '\n')
-
 
 
 # Submits the Username
@@ -169,6 +172,8 @@ def submitHandler():
                 if serverMsg == socket.FILE:
                     changeState(submit)
                     changeState(openFile)
+                    return
+                elif serverMsg == socket.POOL:
                     return
             elif serverMsg in (socket.USER_INVALID, socket.CONNECTION_CLOSE):
                 return
